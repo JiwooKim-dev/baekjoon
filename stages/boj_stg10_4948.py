@@ -1,20 +1,22 @@
 import math
 
+# ### 시간초과 ###
+# def is_prime(n):
+#     for i in range(2, int(math.sqrt(n)) + 1):
+#         if n % i == 0:
+#             return False
+#     return True
 
-def is_prime(n):
-    for i in range(2, int(math.sqrt(n)) + 1):
-        if n % i == 0:
-            return False
-    return True
+# 에라토스테네스의 체 #
+MAXIMUM = 123456
+erastos = [1] * (2 * MAXIMUM + 1)
+erastos[0] = 0
+erastos[1] = 0
 
-
-def count_prime_nums(n):
-    count = 0
-    for i in range(n + 1, n * 2 + 1):
-        if is_prime(i):
-            count += 1
-    return count
-
+for i in range(2, int(math.sqrt(len(erastos)))):
+    if erastos[i]:
+        for j in range(i * 2, len(erastos), i):
+            erastos[j] = 0
 
 numList = []
 while True:
@@ -24,4 +26,4 @@ while True:
     numList.append(n)
 
 for num in numList:
-    print(count_prime_nums(num))
+    print(sum(erastos[num + 1 : num * 2 + 1]))
